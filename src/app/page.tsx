@@ -8,6 +8,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 const app = initializeApp(firebaseConfig);
+
 const auth = getAuth();
 
 const provider = new GoogleAuthProvider();
@@ -18,7 +19,9 @@ export default function Home() {
   function signInWithGoogle() {
     setLoginState(true);
     signInWithPopup(auth, provider)
-      .then((result) => {})
+      .then((result) => {
+        router.push("/home");
+      })
       .catch((error) => {
         setLoginState(false);
       });
