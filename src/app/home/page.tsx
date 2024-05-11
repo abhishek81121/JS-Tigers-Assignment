@@ -7,14 +7,16 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [count, setCount] = useState(1);
-  const [page, setPage] = useState(0);
+
   const [isVisible, setIsVisible] = useState(true);
   const [data, setData] = useState([]);
+
   useEffect(() => {
+    console.log("initla render");
     axios.get("/api/countDocuments").then((response) => {
-      setCount(response.data.count / 6);
+      setCount(response.data.count / 10);
+      setData(response.data.initialData);
       setIsVisible(false);
-      setPage(1);
     });
   }, []);
 
@@ -27,18 +29,19 @@ export default function Home() {
 
   return (
     <div className="max-w-5xl mx-auto px-8">
-      <HoverEffect items={data}></HoverEffect>
-      <div className="flex justify-center">
+      <HoverEffect items={data} />
+      <div className="flex justify-center z-50">
         <Pagination
           total={count}
           className={paginationStyle}
-          initialPage={1}
           variant="bordered"
           onChange={async (number) => {
-            setPage(number);
+            console.log(number);
             axios
               .get("/api/fetchVendor", {
-                params: { limit: (page - 1) * 6, offset: 6 },
+                params: {
+                  offset: (number - 1) * 6,
+                },
               })
               .then((response) => {
                 setData(response.data);

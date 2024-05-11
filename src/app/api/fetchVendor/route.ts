@@ -9,11 +9,13 @@ export async function GET(request: NextRequest, response: NextResponse) {
   const connection = await mongoose.connect(
     process.env.CONNECTION_STRING as string
   );
+  console.log(searchParams.get("offset") + " aka");
   const data = await vendorModel
     .find()
     .skip(Number(searchParams.get("offset")))
     .limit(6);
-  connection.disconnect();
+
+  await connection.disconnect();
 
   return NextResponse.json(data);
 }
