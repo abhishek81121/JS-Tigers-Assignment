@@ -2,7 +2,7 @@
 import { Boxes } from "@/components/ui/background-boxes";
 import { firebaseConfig } from "@/firebase/config";
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithPopup } from "firebase/auth";
+import { getAuth, signInWithPopup, signInWithRedirect } from "firebase/auth";
 import { GoogleAuthProvider } from "firebase/auth";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -23,6 +23,7 @@ export default function Home() {
         router.push("/home");
       })
       .catch((error) => {
+        console.log(error);
         setLoginState(false);
       });
   }
