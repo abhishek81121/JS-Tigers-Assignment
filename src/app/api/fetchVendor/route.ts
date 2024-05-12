@@ -4,7 +4,7 @@ import { limit } from "firebase/firestore";
 import mongoose from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(request: NextRequest, response: NextResponse) {
+export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
 
   await conn();

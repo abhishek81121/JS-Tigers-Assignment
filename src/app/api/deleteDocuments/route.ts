@@ -3,7 +3,7 @@ import { vendorModel } from "@/schema/schemaVendor";
 import mongoose from "mongoose";
 import { NextResponse } from "next/server";
 
-export async function POST(request: Request, response: Response) {
+export async function POST(request: Request) {
   const info = await request.json();
   const objectId = info._id;
   await conn();
