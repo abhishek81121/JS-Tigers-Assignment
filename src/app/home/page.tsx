@@ -12,7 +12,6 @@ export default function Home() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    console.log("initlal render");
     axios.get("/api/countDocuments").then((response) => {
       setCount(Math.round(response.data.count / 6));
       setData(response.data.initialData);
@@ -36,7 +35,6 @@ export default function Home() {
           className={paginationStyle}
           variant="bordered"
           onChange={async (number) => {
-            console.log(number);
             axios
               .get("/api/fetchVendor", {
                 params: {
