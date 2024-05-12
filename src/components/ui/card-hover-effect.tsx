@@ -1,7 +1,9 @@
+"use client";
 import { cn } from "@/utils/cn";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
+import { DialogEdit } from "./dialogDelete";
 
 export const HoverEffect = ({
   items,
@@ -24,9 +26,7 @@ export const HoverEffect = ({
       )}
     >
       {items.map((item, idx) => (
-        <Link
-          href={""}
-          key={""}
+        <div
           className="relative group  block p-2 h-full w-full"
           onMouseEnter={() => setHoveredIndex(idx)}
           onMouseLeave={() => setHoveredIndex(null)}
@@ -55,8 +55,13 @@ export const HoverEffect = ({
               <br></br>
               {item["Bank Account No"]}
             </CardDescription>
+            <br></br>
+            <br></br>
+            <div className="flex justify-between">
+              <DialogEdit VendorName={item["Vendor Name"]}></DialogEdit>
+            </div>
           </Card>
-        </Link>
+        </div>
       ))}
     </div>
   );

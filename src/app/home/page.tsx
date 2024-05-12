@@ -12,9 +12,9 @@ export default function Home() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    console.log("initla render");
+    console.log("initlal render");
     axios.get("/api/countDocuments").then((response) => {
-      setCount(response.data.count / 10);
+      setCount(Math.round(response.data.count / 6));
       setData(response.data.initialData);
       setIsVisible(false);
     });
