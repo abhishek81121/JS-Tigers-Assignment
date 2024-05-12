@@ -20,7 +20,7 @@ export default function Home() {
     setLoginState(true);
     signInWithPopup(auth, provider)
       .then((result) => {
-        router.push("/home/1");
+        router.push("/home");
       })
       .catch((error) => {
         setLoginState(false);

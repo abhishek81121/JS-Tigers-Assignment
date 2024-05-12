@@ -4,17 +4,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import Modaldelete from "./modalDelete";
 import { useEffect, useState } from "react";
-import {
-  Button,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  useDisclosure,
-} from "@nextui-org/react";
-import { conn } from "@/schema/connection";
-import { vendorModel, vendorSchema } from "@/schema/schemaVendor";
 
 export const HoverEffect = ({
   items,
@@ -48,6 +37,7 @@ export const HoverEffect = ({
     >
       {items.map((item, idx) => (
         <div
+          key={item._id}
           className={`relative group  block p-2 h-full w-full `}
           onMouseEnter={() => setHoveredIndex(idx)}
           onMouseLeave={() => setHoveredIndex(null)}

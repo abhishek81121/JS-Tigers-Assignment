@@ -43,7 +43,6 @@ export default function Modaldelete(props: any) {
                     axios.post("/api/deleteDocuments", {
                       _id: props._id,
                     });
-                    console.log("done dna dan");
                   }}
                 >
                   Delete
