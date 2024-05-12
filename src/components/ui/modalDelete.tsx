@@ -1,14 +1,17 @@
-"use client";
+import { conn } from "@/schema/connection";
+import { vendorModel } from "@/schema/schemaVendor";
 import {
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
   Button,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
   useDisclosure,
 } from "@nextui-org/react";
-export function DialogEdit(prop: any) {
+import axios from "axios";
+
+export default function Modaldelete(props: any) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   return (
     <>
@@ -25,14 +28,24 @@ export function DialogEdit(prop: any) {
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                {prop.VendorName}
+                {props.VendorName}
               </ModalHeader>
-              <ModalBody></ModalBody>
+              <ModalBody>Would you like to delete the vendor?</ModalBody>
               <ModalFooter>
                 <Button color="primary" variant="light" onPress={onClose}>
                   Close
                 </Button>
-                <Button color="danger" variant="solid" onPress={onClose}>
+                <Button
+                  color="danger"
+                  variant="solid"
+                  onPress={onClose}
+                  onClick={() => {
+                    axios.post("/api/deleteDocuments", {
+                      _id: props._id,
+                    });
+                    console.log("done dna dan");
+                  }}
+                >
                   Delete
                 </Button>
               </ModalFooter>

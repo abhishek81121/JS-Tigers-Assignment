@@ -2,20 +2,41 @@
 import { cn } from "@/utils/cn";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import { useState } from "react";
-import { DialogEdit } from "./dialogDelete";
+import Modaldelete from "./modalDelete";
+import { useEffect, useState } from "react";
+import {
+  Button,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  useDisclosure,
+} from "@nextui-org/react";
+import { conn } from "@/schema/connection";
+import { vendorModel, vendorSchema } from "@/schema/schemaVendor";
 
 export const HoverEffect = ({
   items,
   className,
 }: {
   items: {
+    _id: string;
     "Vendor Name": string;
     "Bank Name": string;
     "Bank Account No": string;
+    "Address Line 1": string;
+    "Address Line 2": string;
+    City: string;
+    Country: string;
+    "Zip Code": string;
   }[];
   className?: string;
 }) => {
+  const [data, setData] = useState(items);
+  useEffect(() => {
+    setData(items);
+  }, [items]);
   let [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
@@ -27,7 +48,7 @@ export const HoverEffect = ({
     >
       {items.map((item, idx) => (
         <div
-          className="relative group  block p-2 h-full w-full"
+          className={`relative group  block p-2 h-full w-full `}
           onMouseEnter={() => setHoveredIndex(idx)}
           onMouseLeave={() => setHoveredIndex(null)}
         >
@@ -58,7 +79,10 @@ export const HoverEffect = ({
             <br></br>
             <br></br>
             <div className="flex justify-between">
-              <DialogEdit VendorName={item["Vendor Name"]}></DialogEdit>
+              <Modaldelete
+                VendorName={item["Vendor Name"]}
+                _id={item._id}
+              ></Modaldelete>
             </div>
           </Card>
         </div>
